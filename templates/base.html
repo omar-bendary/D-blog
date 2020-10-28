@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+
+    <title>Base</title>
+    {% endblock title %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+</head>
+
+<body>
+    <!-- partial:index.partial.html -->
+    <nav class="nav">
+        <div class="container">
+            <div class="logo">
+                <a href="#">Your Logo</a>
+            </div>
+            <div id="mainListDiv" class="main_list">
+                <ul class="navlinks">
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Portfolio</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <span class="navTrigger">
+                <i></i>
+                <i></i>
+                <i></i>
+            </span>
+        </div>
+    </nav>
+
+    <section class="home">
+    </section>
+    <div style="height: 1000px">
+        <!-- just to make scrolling effect possible -->
+        {% block content %}
+
+        {% endblock content %}
+    </div>
+
+    <!-- Jquery needed -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="{% static 'js/base.js' %}"></script>
+
+    <!-- Function used to shrink nav bar removing paddings and adding black background -->
+    <script>
+        $(window).scroll(function () {
+            if ($(document).scrollTop() > 50) {
+                $('.nav').addClass('affix');
+                console.log("OK");
+            } else {
+                $('.nav').removeClass('affix');
+            }
+        });
+    </script>
+    <!-- partial -->
+    <script src="{% static 'js/base.js' %}"></script>
+    <!-- JavaScript -->
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"
+        integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnEo760AUcUmFx3ibVJJAzGytlQcNXd"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
