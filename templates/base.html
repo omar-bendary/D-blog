@@ -40,8 +40,8 @@
 
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="blog.html" class="nav-link">Articles</a></li>
+                    <li class="nav-item"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="{% url 'post_list' %}" class="nav-link">Articles</a></li>
                     <li class="nav-item"><a href="about.html" class="nav-link">About me</a></li>
                     <li class="nav-item active"><a href="contact.html" class="nav-link">Contact</a></li>
                 </ul>
@@ -84,7 +84,7 @@
                                         class="ion-ios-arrow-forward mr-3"></span>Home</a></li>
                             <li><a href="#" class="py-1 d-block"><span
                                         class="ion-ios-arrow-forward mr-3"></span>About</a></li>
-                            <li><a href="#" class="py-1 d-block"><span
+                            <li><a href="{% url 'post_list' %}" class="py-1 d-block"><span
                                         class="ion-ios-arrow-forward mr-3"></span>Articles</a></li>
                             <li><a href="#" class="py-1 d-block"><span
                                         class="ion-ios-arrow-forward mr-3"></span>Contact</a></li>

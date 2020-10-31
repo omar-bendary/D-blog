@@ -11,4 +11,6 @@ class BlogPostsView(ListView):
 
 
 class BlogDetailView(DetailView):
-    pass
+    model = Post
+    template_name = 'posts/post_detail.html'
+    context_object_name = 'post'

@@ -19,6 +19,9 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+    def month_published(self):
+        return self.created_on.strftime('%B')
+
     def get_absolute_url(self):
         return reverse('post_detail', kwargs={'pk': str(self.pk)})
 
