@@ -69,4 +69,20 @@ def auto_delete_file_on_change(sender, instance, **kwargs):
 
 
 class Comment(models.Model):
-    pass
+    post = models.ForeignKey(
+        Post, on_delete=models.CASCADE, related_name='comments',)
+    body = models.TextField(blank=True, null=True)
+    author = models.ForeignKey(
+        get_user_model(), on_delete=models.CASCADE,)
+    created_on = models.DateTimeField(auto_now_add=True,)
+    updated_on = models.DateTimeField(auto_now=True,)
+
+    def __str__(self):
+        return self.body
+
+    def get_absolute_url(self):
+        return reverse('post_list')
+
+    # Display newest on top
+    class Meta:
+        ordering = ['-created_on', ]
