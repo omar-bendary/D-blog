@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}
 <title>Blog Posts</title>
 {% endblock title %}
@@ -7,10 +8,13 @@
 
 
 {% block content %}
-<div class="hero-wrap js-fullheight"
-    style="background-image: url('https://cdn.pixabay.com/photo/2012/12/20/10/12/article-71341_960_720.jpg');"
+<div class="hero-wrap js-fullheight" style="background-image: url({% static 'images/cover-2.jpg' %});"
     data-stellar-background-ratio="0.5">
-    <div class="overlay"></div>
+    <div class="overlay" style="background-color: #FF3CAC;
+    background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+    e: linear-gradient(0deg, #000000 0%, #14817d 100%);
+
+    "></div>
     <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start"
             data-scrollax-parent="true">
@@ -33,15 +37,25 @@
         </div>
     </div>
 </div>
+<h1 style="text-align: center;"><a href="{% url 'post_new' %}"><button type="button" class="btn btn-warning btn-lg">Add
+            a New
+            Article</button></a></h1>
 
 <section class="ftco-section bg-light">
+
     <div class="container">
-        <div class="row d-flex">
+
+        <div class=" row d-flex">
             {% for post in post_list  %}
             <div class="col-md-4 d-flex ftco-animate">
                 <div class="blog-entry justify-content-end">
-                    <a href="{{ post.get_absolute_url }}" class="block-20"
-                        style="background-image: url('images/image_1.jpg');">
+                    <a href="{{ post.get_absolute_url }}" class="block-20">
+
+                        {% if post.image %}
+                        <img src="{{ post.image.url }}" class="block-20">
+                        {% endif %}
+
+
                     </a>
                     <div class="text p-4 float-right d-block">
                         <div class="topper d-flex align-items-center">
@@ -56,9 +70,21 @@
                         <h3 class="heading mb-3"><a href="{{ post.get_absolute_url }}">{{post.title}}</a></h3>
                         <p>{{ post.body | slice:":200" }}...
                         </p>
+
                         <p><a href="{{ post.get_absolute_url }}" class="btn-custom"><span
                                     class="ion-ios-arrow-round-forward mr-3"></span>Read
                                 more</a></p>
+                        {% if user.is_authenticated %}
+
+                        {% if user.id == post.author.id %}
+
+                        <p> <a href="{% url 'post_edit' post.pk %}">Edit</a> |
+                            <a href="{% url 'post_delete' post.pk %}">Delete</a></p>
+
+                        {% endif %}
+
+
+                        {% endif %}
                     </div>
                 </div>
             </div>

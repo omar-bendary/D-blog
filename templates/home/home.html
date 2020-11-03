@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}
 <title>Home</title>
 {% endblock title %}
@@ -7,10 +8,13 @@
 
 
 {% block content %}
-<div class="hero-wrap js-fullheight"
-    style="background-image: url('https://themetrust.com/wp-content/uploads/2018/06/blog-resource-cover-1000x500.jpg');"
+<div class="hero-wrap js-fullheight" style="background-image: url({% static 'images/cover-1.jpg' %});"
     data-stellar-background-ratio="0.5">
-    <div class="overlay"></div>
+    <div class="overlay" style="background-color: #FF3CAC;
+background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+e: linear-gradient(0deg, #000000 0%, #14817d 100%);
+
+    "></div>
     <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start"
             data-scrollax-parent="true">
@@ -21,8 +25,13 @@
                 <div class="row">
                     <div class="col-md-7">
                         <div class="text">
-                            <p>This is a web application developed by omar bendary using Python Web Framework Django.
+                            <p>This is a web application developed by Omar Bendary using Python Web Framework Django.
                             </p>
+                            <p>You can Read, Create, Update, and Delete Articles.
+                            </p>
+                            <p>You can NOT Update or Delete an article if you're not the author of that article, so make
+                                sure to log in to create your own article and you can easily update or remove your own
+                                articles.</p>
                             <div class="mouse">
                                 <a href="#" class="mouse-icon">
                                     <div class="mouse-wheel"><span class="ion-ios-arrow-round-down"></span></div>
@@ -36,7 +45,9 @@
     </div>
 </div>
 
-
+<h1 style="text-align: center;"><a href="{% url 'post_new' %}"><button type="button" class="btn btn-warning btn-lg">Add
+            a New
+            Article</button></a></h1>
 
 
 
@@ -44,28 +55,43 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+                {% for post in post_list  %}
                 <div class="case">
                     <div class="row">
                         <div class="col-md-6 col-lg-6 col-xl-8 d-flex">
-                            <a href="blog-single.html" class="img w-100 mb-3 mb-md-0"
-                                style="background-image: url(images/image_1.jpg);"></a>
+                            <a href="{{ post.get_absolute_url }}" class="img w-100 mb-3 mb-md-0">
+
+                                {% if post.image %}
+                                <img src="{{ post.image.url}}" class=" img w-100 mb-3 mb-md-0">
+                                {% endif %}
+
+
+                            </a>
                         </div>
                         <div class="col-md-6 col-lg-6 col-xl-4 d-flex">
                             <div class="text w-100 pl-md-3">
-                                <span class="subheading">Illustration</span>
-                                <h2><a href="blog-single.html">Build a website in minutes with Adobe Templates</a></h2>
+                                <span class="subheading">Software Engieering</span>
+                                <h2><a href="blog-single.html">{{post.title}}</a></h2>
                                 <ul class="media-social list-unstyled">
-                                    <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                                    <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                                    <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                                    <li class="ftco-animate"><a href="https://twitter.com/Omar_Bendary_Jr"><span
+                                                class="icon-twitter"></span></a></li>
+                                    <li class="ftco-animate"><a
+                                            href="https://www.facebook.com/omar.elsayed.bendary/"><span
+                                                class="icon-facebook"></span></a></li>
+                                    <li class="ftco-animate"><a href="https://www.instagram.com/omar_bendary_jr/"><span
+                                                class="icon-instagram"></span></a></li>
                                 </ul>
                                 <div class="meta">
-                                    <p class="mb-0"><a href="#">11/13/2019</a> | <a href="#">12 min read</a></p>
+                                    <p class="mb-0"><a href="#">{{post.created_on}}</a> | <a
+                                            href="#">{{post.author.first_name}}
+                                            {{post.author.last_name}}</a></p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                {% endfor %}
+
 
             </div>
         </div>
