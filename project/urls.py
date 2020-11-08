@@ -29,6 +29,7 @@ urlpatterns = [
     # local
     path('', include('home.urls')),
     path('posts/', include('posts.urls')),
+    path('contact/', include('contact.urls')),
 ]
 
 

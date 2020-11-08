@@ -4,13 +4,14 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.edit import UpdateView, DeleteView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
-from .forms import CommentForm
+
 
 # Create your views here.
 
 
 class BlogPostsView(ListView):
     model = Post
+    paginate_by = 3
     template_name = 'posts/post_list.html'
     context_object_name = 'post_list'
 
@@ -60,19 +61,17 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class CommentCreateView(CreateView):
+class CommentCreateView(LoginRequiredMixin, CreateView):
     model = Comment
 
     fields = ('body',)
     template_name = 'posts/comment_new.html'
+    login_url = 'account_login'
 
-    # post prefilled
-    def form_vaild(self, form):
-        form.instace.post_id = self.kwargs['pk']
-        return super().form_valid(form)
-
-    # author prefilled
+    # post and author prefilled
 
     def form_valid(self, form):
         form.instance.author = self.request.user
+        form.instance.post_id = self.kwargs['pk']
+        form.instance.save()
         return super().form_valid(form)

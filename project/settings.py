@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     # local
     'users.apps.UsersConfig',
     'home.apps.HomeConfig',
-    'about.apps.AboutConfig',
+    'contact.apps.ContactConfig',
     'posts.apps.PostsConfig',
 
     # 3rd-Party
@@ -165,7 +165,29 @@ ACCOUNT_SESSION_REMEMBER = True
 
 
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
-ACCOUNT_USERNAME_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
+
+
+ACCOUNT_FORMS = {
+    'add_email': 'allauth.account.forms.AddEmailForm',
+    'change_password': 'allauth.account.forms.ChangePasswordForm',
+    'disconnect': 'allauth.socialaccount.forms.DisconnectForm',
+    'login': 'allauth.account.forms.LoginForm',
+    'reset_password': 'allauth.account.forms.ResetPasswordForm',
+    'reset_password_from_key': 'allauth.account.forms.ResetPasswordKeyForm',
+    'set_password': 'allauth.account.forms.SetPasswordForm',
+    'signup': 'users.forms.CustomUserCreationForm',  # my custom user
+    # 'signup': 'allauth.socialaccount.forms.SignupForm',
+}
+
+SECRET_KEY = os.environ.get('SECRET_KEY')
+# Gamil STMP
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'omar.bendary1996@gmail.com'
+EMAIL_HOST_PASSWORD = SECRET_KEY
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

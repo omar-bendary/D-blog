@@ -6,5 +6,6 @@ from posts.models import Post
 
 class HomePostsView(ListView):
     model = Post
+    paginate_by = 2
     template_name = 'home/home.html'
     context_object_name = 'post_list'

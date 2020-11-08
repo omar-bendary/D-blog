@@ -48,12 +48,17 @@
 
 
 
-                    <li class="nav-item"><a href="about.html" class="nav-link">About me</a></li>
-                    <li class="nav-item active"><a href="contact.html" class="nav-link">Contact</a></li>
+
+                    <li class="nav-item active"><a href="{% url 'contact:contact' %}" class="nav-link">Contact</a></li>
                     {% if user.is_authenticated %}
-                    <li class="nav-item>"><a class="nav-link">Hi {{user.username}}</a></li>
-                    <li class="nav-item"><a href="{% url 'account_logout' %}" class="nav-link"><button
-                                class="btn btn-dark">Logout</button></a></li>
+                    <li class="nav-item dropdown"><a class="nav-link dropdown-toggle">{{user.first_name}}
+                            {{user.last_name}}</a>
+                        <div class="dropdown-menu">
+                            <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
+
+                        </div>
+                    </li>
+
                     {% else %}
                     <li class="nav-item"><a href="{% url 'account_login' %}" class="nav-link"><button
                                 class="btn btn-dark">Login</button></a>

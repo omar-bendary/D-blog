@@ -81,7 +81,7 @@ class Comment(models.Model):
         return self.body
 
     def get_absolute_url(self):
-        return reverse('post_list')
+        return reverse('post_detail', kwargs={'pk': str(self.post.pk)})
 
     # Display newest on top
     class Meta:

@@ -84,14 +84,14 @@
 
 
                         <div class="pt-5 mt-5">
-                            <h3 class="mb-5">Comments...</h3>
+                            <h3 class="mb-5">{{post.comments.all.count}} Comments </h3>
                             <ul class="comment-list">
                                 {% for comment in post.comments.all %}
                                 <li class="comment">
 
 
                                     <div class="comment-body">
-                                        <h3>{{comment.author.username}}</h3>
+                                        <h3>{{comment.author.first_name}} {{comment.author.last_name}}</h3>
                                         <div class="meta mb-3">{{comment.created_on}}</div>
                                         <p>{{comment.body}}</p>
 
