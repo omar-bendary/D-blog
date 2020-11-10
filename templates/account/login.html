@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
+{% load socialaccount %}
 
 {% block title %}Log In{% endblock title %}
 
@@ -46,6 +47,9 @@
             {% endbuttons %}
         </form>
         <p>Don't have an account ?<a href="{% url 'account_signup' %}"> Signup</a></p>
+        <p>or you can Login With <a href="{% provider_login_url 'google' %}" style="color: #2B86C5;">Google</a></p>
+
+
     </div>
 </div>
 <br>

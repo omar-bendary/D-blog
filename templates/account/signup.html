@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
+{% load socialaccount %}
 
 {% block title %}Sign up{% endblock title %}
 
@@ -43,9 +44,12 @@
             {% buttons %}
             <button type="submit" class="btn btn-primary">SignUp</button>
             {% endbuttons %}
+            <a href="{% provider_login_url 'google' %}" style="color: #2B86C5;">Signup with your Google Account</a>
         </form>
+
     </div>
 </div>
+
 <br>
 <br>
 <br>
